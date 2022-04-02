@@ -1,3 +1,15 @@
+from itertools import chain
+
+class Board:
+    def __init__(self, board) -> None:
+        self.emptySpace = board
+
+    def getEmptySpaces(self):
+        return self.emptySpace
+
+    def removeSpace(self, i):
+        del self.emptySpace[i]
+
 # flat -> 2d
 def normalBoard(board):
     newBoard = []
@@ -10,15 +22,10 @@ def normalBoard(board):
     return newBoard
 
 # 2d -> flat
-
-
 def flattenBoard(board):
-    board = board[0] + board[1] + board[2]
-    return board
+    return list(chain.from_iterable(board))
 
 # win through normal board
-
-
 def win(board: list) -> tuple:
 
     for player in ['x', 'o']:
@@ -40,8 +47,6 @@ def win(board: list) -> tuple:
     return False, str()
 
 # win through a flattened list
-
-
 def win2(board: list) -> tuple:
 
     for player in ['x', 'o']:
@@ -64,8 +69,6 @@ def win2(board: list) -> tuple:
     return False, str()
 
 # see if square is not occupied
-
-
 def notOccupied(board):
     open = list()
 
@@ -135,34 +138,80 @@ def backtrack2(board, openSpaces):
 
     return board
 
+def isFull(board):
+    for x in board:
+        if x == ' ':
+            return False
+
+    return True
+
 # v3
 def backtrack3(board, openSpaces):
 
-    if len(openSpaces) == 0:
-        return True
+    # no more spaces on the board
+    # check win and return the condition
+    if isFull(board):
+        
+        game_is_over, winning_character = win2(board)
+        # board is full
+        if not game_is_over:
+            return (False, -1)
 
-    for space in openSpaces:
+    for starting_pos in openSpaces:
+        print(starting_pos)
 
+        # computer only plays on even number of spaces left (8, 6, 4, 2)
         if len(openSpaces) % 2 == 0:
-            player = 'o'
+            character = 'o'
         else:
-            player = 'x'
+            character = 'x'
 
-        board[space] = player
+        board[starting_pos] = character
 
-        result, winner = win(normalBoard(board))
+        game_is_over, winning_character = win2(board)
+        # if game_is_over and winning_character == 'x':
+        #     return (False, -1)
 
-        if result and winner == 'o':
-            # winning board, return index
-            if backtrack3(board, notOccupied(board)):
-                return True
+        # this means that computer has a winning position so that position is returned
+        if game_is_over and winning_character == 'o':
+            return (True, starting_pos)
 
-        if not result and winner == 'x':
-            # losing board, go to previous level
-            board[space] = ' '
+        else:
+            return backtrack3(board, notOccupied(board))
 
-    return False
+    return (False, -1)
+    
+# v4
+def backtrack4(board, openSpaces, starting=0):
 
+    # no more spaces on the board
+    # check win and return the condition
+    game_is_over, winning_character = win2(board)
+
+    if game_is_over and winning_character == 'o':
+        return (True, openSpaces[starting])
+
+    if isFull(board):
+        # board is full
+        if not game_is_over:
+            return (False, -1)
+
+    for starting_pos in openSpaces:
+
+        # computer only plays on even number of spaces left (8, 6, 4, 2)
+        if len(openSpaces) % 2 == 0:
+            character = 'o'
+        else:
+            character = 'x'
+
+        board[starting_pos] = character
+
+        game_is_over, winning_character = backtrack4(board, notOccupied(board), starting)
+
+        if game_is_over:
+            return (True, starting_pos)
+
+    return (False, -1)
 
 def printBoard(board: list) -> None:
     for i in range(3):
@@ -181,9 +230,11 @@ def printBoard(board: list) -> None:
             print("-----------")
 
 
-board = [['x', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+board = [['x', ' ', ' '], [' ', 'o', ' '], ['x', ' ', ' ']]
 board = flattenBoard(board)
 
-if backtrack3(board, notOccupied(board)):
+b = Board(notOccupied(board))
 
-    printBoard(normalBoard(board))
+is_win, starting_pos = backtrack4(board, notOccupied(board))
+printBoard(normalBoard(board))
+print(is_win, starting_pos)

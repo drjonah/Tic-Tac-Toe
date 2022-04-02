@@ -1,25 +1,15 @@
+from asyncio.format_helpers import _format_callback_source
 
-# for i in range(6):
 
-#     for j in range(3):
-        
-#         if (i > 2): 
-#             row = i + (j - 2 - i%3)
-#             col = i - 3
+def factorial(number):
 
-#         else: 
-#             row = i
-#             col= j
+    if number < 0:
+        return "NA"
 
-#         print(f'[{row},{col}]')
+    if number < 1:
+        return 1
 
-for i in range(3):
-    print('i = ' + str(i))
+    else:
+        return number * factorial(number-1)
 
-    print('horizontal')
-    print(str(i*3) + ' ' + str((i*3)+1) + ' ' + str((i*3)+2))
-
-    print('vertical')
-    print(str(i) + ' ' + str((i+3)) + ' ' + str((i+6)))
-
-    print()
+print(factorial(3))
