@@ -1,4 +1,5 @@
 from itertools import chain
+import copy
 
 class Board:
     def __init__(self, board) -> None:
@@ -189,12 +190,16 @@ def backtrack4(board, openSpaces, starting=0):
     game_is_over, winning_character = win2(board)
 
     if game_is_over and winning_character == 'o':
+        printBoard(normalBoard(board))
+        print()
         return (True, openSpaces[starting])
 
     if isFull(board):
         # board is full
         if not game_is_over:
             return (False, -1)
+
+    original_board = copy.deepcopy(board)
 
     for starting_pos in openSpaces:
 
@@ -204,6 +209,10 @@ def backtrack4(board, openSpaces, starting=0):
         else:
             character = 'x'
 
+        board = copy.deepcopy(original_board)
+
+        printBoard(normalBoard(board))
+        print()
         board[starting_pos] = character
 
         game_is_over, winning_character = backtrack4(board, notOccupied(board), starting)
@@ -230,7 +239,7 @@ def printBoard(board: list) -> None:
             print("-----------")
 
 
-board = [['x', ' ', ' '], [' ', 'o', ' '], ['x', ' ', ' ']]
+board = [['x', ' ', ' '], ['o', 'o', ' '], ['x', ' ', ' ']]
 board = flattenBoard(board)
 
 b = Board(notOccupied(board))
