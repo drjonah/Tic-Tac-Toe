@@ -1,16 +1,6 @@
 from itertools import chain
 import copy
 
-class Board:
-    def __init__(self, board) -> None:
-        self.emptySpace = board
-
-    def getEmptySpaces(self):
-        return self.emptySpace
-
-    def removeSpace(self, i):
-        del self.emptySpace[i]
-
 # flat -> 2d
 def normalBoard(board):
     newBoard = []
