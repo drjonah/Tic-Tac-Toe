@@ -85,9 +85,11 @@ def backtrack(board, openSpaces, starting=0):
 
         board = copy.deepcopy(original_board)
 
+        board[starting_pos] = character
+
+        print('added at ', starting_pos)
         printBoard(normalBoard(board))
         print()
-        board[starting_pos] = character
 
         game_is_over, winning_pos = backtrack(board, notOccupied(board), starting)
 
@@ -106,8 +108,10 @@ def backtrack(board, openSpaces, starting=0):
 
         if game_is_over == None and winning_pos == 0:
             print('tie') 
+            starting = openSpaces.index(starting_pos)
             printBoard(normalBoard(board))
             print()
+            continue
 
 
     return (False, -1)
@@ -131,10 +135,12 @@ def printBoard(board: list) -> None:
 def main():
     # board
     # board = [['o', 'o', 'x'], [' ', 'o', ' '], ['x', ' ', ' ']]
-    board = [[' ', ' ', ' '], [' ', 'x', ' '], [' ', ' ', ' ']]
+    board = [['o', 'x', 'o'], ['x', 'x', ' '], [' ', ' ', ' ']]
+    # board = [[' ', ' ', ' '], [' ', 'x', ' '], [' ', ' ', ' ']]
     board = flattenBoard(board)
 
     # backtracking
+    print('starting backtracking...')
     is_win, starting_pos = backtrack(board, notOccupied(board))
 
     # print result
