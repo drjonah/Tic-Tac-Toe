@@ -71,7 +71,7 @@ def backtrack(board, openSpaces, starting=0):
     if isFull(board):
         # tie game - go back to next position but return starting point
         if not game_is_over:
-            return (False, 0)
+            return (None, 0)
 
     original_board = copy.deepcopy(board)
 
@@ -100,7 +100,15 @@ def backtrack(board, openSpaces, starting=0):
         if not game_is_over and winning_pos == -1:
             print('lose')
             starting = openSpaces.index(starting_pos)
+            printBoard(normalBoard(board))
+            print()
             continue
+
+        if game_is_over == None and winning_pos == 0:
+            print('tie') 
+            printBoard(normalBoard(board))
+            print()
+
 
     return (False, -1)
 
@@ -122,7 +130,8 @@ def printBoard(board: list) -> None:
 
 def main():
     # board
-    board = [['o', 'o', 'x'], [' ', 'o', ' '], ['x', ' ', ' ']]
+    # board = [['o', 'o', 'x'], [' ', 'o', ' '], ['x', ' ', ' ']]
+    board = [[' ', ' ', ' '], [' ', 'x', ' '], [' ', ' ', ' ']]
     board = flattenBoard(board)
 
     # backtracking
