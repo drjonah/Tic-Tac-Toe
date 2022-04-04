@@ -63,6 +63,7 @@ def backtrack(board, openSpaces, starting=0):
     game_is_over, winning_character = win(board)
 
     if game_is_over and winning_character == 'o':
+        print('winning:')
         printBoard(normalBoard(board))
         print()
         return (True, openSpaces[starting])
@@ -92,10 +93,13 @@ def backtrack(board, openSpaces, starting=0):
 
         # win - return first move
         if game_is_over:
+            print('win')
             return (True, starting_pos)
 
         # lose - go back to next starting position
         if not game_is_over and winning_pos == -1:
+            print('lose')
+            starting = openSpaces.index(starting_pos)
             continue
 
     return (False, -1)
@@ -116,12 +120,16 @@ def printBoard(board: list) -> None:
         if (i < 2):
             print("-----------")
 
-# board
-board = [['x', ' ', ' '], ['o', 'o', ' '], ['x', ' ', ' ']]
-board = flattenBoard(board)
+def main():
+    # board
+    board = [['o', 'o', 'x'], [' ', 'o', ' '], ['x', ' ', ' ']]
+    board = flattenBoard(board)
 
-# backtracking
-is_win, starting_pos = backtrack(board, notOccupied(board))
+    # backtracking
+    is_win, starting_pos = backtrack(board, notOccupied(board))
 
-# print result
-print(is_win, starting_pos)
+    # print result
+    print(is_win, starting_pos)
+
+if __name__ == '__main__':
+    main()
