@@ -62,18 +62,28 @@ def backtrack(board, openSpaces, starting=0):
     # check win and return the condition
     game_is_over, winning_character = win(board)
 
+    # win
     if game_is_over and winning_character == 'o':
-        print('winning:')
+        print('win')
         printBoard(normalBoard(board))
         print()
         return (True, openSpaces[starting])
 
+    # loss
+    if game_is_over and winning_character == 'x':
+        print('lose')
+        printBoard(normalBoard(board))
+        print()
+        return (False, -1)
+
+    # tie
     if isFull(board):
         # tie game - go back to next position but return starting point
         if not game_is_over:
             return (None, 0)
 
     original_board = copy.deepcopy(board)
+    # winning_combinations = []
 
     for starting_pos in openSpaces:
 
@@ -97,22 +107,9 @@ def backtrack(board, openSpaces, starting=0):
         if game_is_over:
             print('win')
             return (True, starting_pos)
-
-        # lose - go back to next starting position
-        if not game_is_over and winning_pos == -1:
-            print('lose')
-            starting = openSpaces.index(starting_pos)
-            printBoard(normalBoard(board))
-            print()
+        
+        else:
             continue
-
-        if game_is_over == None and winning_pos == 0:
-            print('tie') 
-            starting = openSpaces.index(starting_pos)
-            printBoard(normalBoard(board))
-            print()
-            continue
-
 
     return (False, -1)
 
@@ -135,8 +132,9 @@ def printBoard(board: list) -> None:
 def main():
     # board
     # board = [['o', 'o', 'x'], [' ', 'o', ' '], ['x', ' ', ' ']]
-    board = [['o', 'x', 'o'], ['x', 'x', ' '], [' ', ' ', ' ']]
+    # board = [['o', 'x', 'o'], ['x', 'x', 'o'], [' ', ' ', ' ']]
     # board = [[' ', ' ', ' '], [' ', 'x', ' '], [' ', ' ', ' ']]
+    board = [['x', 'x', 'o'], ['x', 'o', ' '], [' ', ' ', ' ']]
     board = flattenBoard(board)
 
     # backtracking
@@ -145,6 +143,8 @@ def main():
 
     # print result
     print(is_win, starting_pos)
+
+    # input()
 
 if __name__ == '__main__':
     main()
