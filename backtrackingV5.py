@@ -74,7 +74,7 @@ def ai(board):
     # list for winning moves
     # moves[0] = tie
     # moves[1] = win
-    moves = [[], []]
+    moves = []
 
     for open_space in na:
 
@@ -95,11 +95,8 @@ def ai(board):
 
         # when a move is winning we want to save the move to a list #
         # if move is 1 it is winning
-        if move == 0:
-            moves[0].append(open_space)
-
-        if move == 1:
-            moves[1].append(open_space)
+        if move == 0 or move == 1:
+            moves.append(open_space)
 
         # print
         printBoard(normalBoard(board))
@@ -116,9 +113,9 @@ def ai(board):
 
 def minimax(board, depth, maximizingPlayer):
 
-    print()
-    printBoard(normalBoard(board))
-    print()
+    # print()
+    # printBoard(normalBoard(board))
+    # print()
 
     game_over, winning_character = win(board)
 
@@ -189,17 +186,18 @@ def main():
     # backtracking
     print('starting backtracking...')
     move = ai(board)
+    print('best move: ', move)
 
-    for i in move:
-        base = ' '
-        for j in i:
-            base += str(j)
-            base += ' '
+    # for i in move:
+    #     base = ' '
+    #     for j in i:
+    #         base += str(j)
+    #         base += ' '
 
-        if move.index(i) == 0:
-            print('ties: ' + base + ' ')
-        if move.index(i) == 1:
-            print('wins: ' + base + ' ')
+    #     if move.index(i) == 0:
+    #         print('ties: ' + base + ' ')
+    #     if move.index(i) == 1:
+    #         print('wins: ' + base + ' ')
 
     # print result
     # printBoard(normalBoard(move))
