@@ -1,7 +1,10 @@
 from itertools import chain
 import copy
+from math import inf
 
 # flat -> 2d
+
+
 def normalBoard(board):
     newBoard = []
 
@@ -13,10 +16,14 @@ def normalBoard(board):
     return newBoard
 
 # 2d -> flat
+
+
 def flattenBoard(board):
     return list(chain.from_iterable(board))
 
 # see if square is not occupied
+
+
 def notOccupied(board):
     open = list()
 
@@ -26,6 +33,7 @@ def notOccupied(board):
 
     return open
 
+
 def isFull(board):
     for x in board:
         if x == ' ':
@@ -34,6 +42,8 @@ def isFull(board):
     return True
 
 # win through a flattened list
+
+
 def win(board: list) -> tuple:
 
     for player in ['x', 'o']:
@@ -54,27 +64,85 @@ def win(board: list) -> tuple:
             return True, player
 
     return False, str()
-    
+
 
 def ai(board):
-    score = 0 # score of move
-    move = 0 # index of move
+    # open spaces
+    na = notOccupied(board)
 
-    for open_space in notOccupied(board):
+    # list for winning moves
+    moves = []
 
+    for open_space in na:
+
+        print('\n')
+        print('start @ index ', open_space)
+
+        # put ai in empty space
         board[open_space] = 'o'
-        temp_score = backtrack(board)
+        printBoard(normalBoard(board))
+
+        # find best move
+        move = minimax(board, open_space, len(na), False)  # return -1,0,1
+        print(move)
+
+        # if move is 1 it is winning
+        if move == 1:
+            moves.append(open_space)
+
+        try:
+            print('ai move @ index ', open_space)
+        except:
+            print('ai move @ index infinity')
+        
+        printBoard(normalBoard(board))
+
+        # resets board
         board[open_space] = ' '
 
-        if temp_score > score:
-            score = temp_score
-            move = open_space
+        print()
 
-    board[move] = 'o'
-    return board
+    return max(moves)
 
 
-# v4
+def minimax(board, position, depth, maximizingPlayer):
+
+    if depth == 0 or isFull(board):
+        return 0
+
+    game_over, winning_character = win(board)
+
+    if game_over and winning_character == 'o':
+        return 1
+
+    if game_over and winning_character == 'x':
+        return -1
+
+    # computer
+    if maximizingPlayer:
+        maxEval = -inf
+        board[position] = 'o'
+
+        for pos in notOccupied(board):
+
+            eval = minimax(board, pos, depth-1, False)
+            maxEval = max(maxEval, eval)
+
+        return maxEval
+
+    # player
+    else:
+        minEval = inf
+        board[position] = 'x'
+
+        for pos in notOccupied(board):
+            eval = minimax(board, pos, depth-1, True)
+            minEval = min(minEval, eval)
+
+        return minEval
+
+
+# v5
 def backtrack(board):
 
     game_is_over, winning_character = win(board)
@@ -101,7 +169,7 @@ def backtrack(board):
         board = copy.deepcopy(original_board)
         board[open_space] = character
 
-        score =  backtrack(board)
+        score = backtrack(board)
 
         if score == 1:
             return 1
@@ -123,6 +191,7 @@ def printBoard(board: list) -> None:
         if (i < 2):
             print("-----------")
 
+
 def main():
     # board
     # board = [['o', 'o', 'x'], [' ', 'o', ' '], ['x', ' ', ' ']]
@@ -134,11 +203,13 @@ def main():
     # backtracking
     print('starting backtracking...')
     move = ai(board)
+    print('\nbest move @ index', move)
 
     # print result
-    printBoard(normalBoard(move))
+    # printBoard(normalBoard(move))
 
     # input()
+
 
 if __name__ == '__main__':
     main()
