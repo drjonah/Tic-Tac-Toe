@@ -4,8 +4,6 @@ from math import inf
 from operator import index
 
 # flat -> 2d
-
-
 def normalBoard(board):
     newBoard = []
 
