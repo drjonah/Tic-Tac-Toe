@@ -91,14 +91,14 @@ def ai(board):
 
         # because we do not want the inital postion to be written over when passed into minimax #
         # if not last number
-        if na.index(open_space)+1 != len(na):
-            pos = na[na.index(open_space) + 1]
-        # if last number
-        else:
-            pos = na[0]
+        # if na.index(open_space)+1 != len(na):
+        #     pos = na[na.index(open_space) + 1]
+        # # if last number
+        # else:
+        #     pos = na[0]
 
         # find best move
-        move = minimax(board, pos, len(na), False)  # return -1,0,1
+        move = minimax(board, len(na), False)  # return -1,0,1
         print('move score: ', move)
 
         # when a move is winning we want to save the move to a list #
@@ -122,7 +122,7 @@ def ai(board):
     return moves
 
 
-def minimax(board, position, depth, maximizingPlayer):
+def minimax(board, depth, maximizingPlayer):
 
     print()
     printBoard(normalBoard(board))
@@ -145,11 +145,11 @@ def minimax(board, position, depth, maximizingPlayer):
     # computer is findings its max win
     if maximizingPlayer:
         maxEval = -inf
-        board[position] = 'o'
+        # board[position] = 'o'
 
         for pos in notOccupied(board):
-
-            eval = minimax(board, pos, depth-1, False)
+            board[pos] = 'o'
+            eval = minimax(board, depth-1, False)
             maxEval = max(maxEval, eval)
 
         return maxEval
@@ -157,11 +157,11 @@ def minimax(board, position, depth, maximizingPlayer):
     # player is finding its min loss
     else:
         minEval = inf
-        board[position] = 'x'
+        # board[position] = 'x'
 
         for pos in notOccupied(board):
-
-            eval = minimax(board, pos, depth-1, True)
+            board[pos] = 'x'
+            eval = minimax(board, depth-1, True)
             minEval = min(minEval, eval)
 
         return minEval
