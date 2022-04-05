@@ -1,6 +1,7 @@
 from itertools import chain
 import copy
 from math import inf
+from operator import index
 
 # flat -> 2d
 
@@ -75,6 +76,11 @@ def ai(board):
 
     for open_space in na:
 
+        # because we want to revert back to the original board after trying the combinations #
+        # original board
+        original_board = copy.deepcopy(board)
+
+        # print
         print('\n')
         print('start @ index ', open_space)
 
@@ -82,43 +88,57 @@ def ai(board):
         board[open_space] = 'o'
         printBoard(normalBoard(board))
 
+        # because we do not want the inital postion to be written over when passed into minimax #
+        # if not last number
+        if na.index(open_space)+1 != len(na):
+            pos = na[na.index(open_space) + 1]
+        # if last number
+        else:
+            pos = na[0]
+
         # find best move
-        move = minimax(board, open_space, len(na), False)  # return -1,0,1
+        move = minimax(board, pos, len(na), False)  # return -1,0,1
         print(move)
 
+        # when a move is winning we want to save the move to a list #
         # if move is 1 it is winning
         if move == 1:
             moves.append(open_space)
 
+        # print
         try:
             print('ai move @ index ', open_space)
         except:
             print('ai move @ index infinity')
-        
         printBoard(normalBoard(board))
 
-        # resets board
-        board[open_space] = ' '
+        # because we want to revert back to the original board after trying the combinations #
+        # resets board to original board
+        board = original_board
 
         print()
 
-    return max(moves)
+    # idk what to do here lol
+    return moves
 
 
 def minimax(board, position, depth, maximizingPlayer):
 
+    # indicates a tie
     if depth == 0 or isFull(board):
         return 0
 
     game_over, winning_character = win(board)
 
+    # indicates a win
     if game_over and winning_character == 'o':
         return 1
 
+    # indicates a tie
     if game_over and winning_character == 'x':
         return -1
 
-    # computer
+    # computer is findings its max win
     if maximizingPlayer:
         maxEval = -inf
         board[position] = 'o'
@@ -130,7 +150,7 @@ def minimax(board, position, depth, maximizingPlayer):
 
         return maxEval
 
-    # player
+    # player is finding its min loss
     else:
         minEval = inf
         board[position] = 'x'
