@@ -89,14 +89,6 @@ def ai(board):
         # put ai in empty space
         board[open_space] = 'o'
 
-        # because we do not want the inital postion to be written over when passed into minimax #
-        # if not last number
-        # if na.index(open_space)+1 != len(na):
-        #     pos = na[na.index(open_space) + 1]
-        # # if last number
-        # else:
-        #     pos = na[0]
-
         # find best move
         move = minimax(board, len(na), False)  # return -1,0,1
         print('move score: ', move)
@@ -130,6 +122,10 @@ def minimax(board, depth, maximizingPlayer):
 
     game_over, winning_character = win(board)
 
+    # indicates a tie
+    if depth == 0 or isFull(board):
+        return 0
+
     # indicates a win
     if game_over and winning_character == 'o':
         return 1
@@ -138,31 +134,29 @@ def minimax(board, depth, maximizingPlayer):
     if game_over and winning_character == 'x':
         return -1
 
-    # indicates a tie
-    if depth == 0 or isFull(board):
-        return 0
-
     # computer is findings its max win
     if maximizingPlayer:
         maxEval = -inf
-        # board[position] = 'o'
+        computer_board = copy.deepcopy(board)
 
         for pos in notOccupied(board):
             board[pos] = 'o'
             eval = minimax(board, depth-1, False)
             maxEval = max(maxEval, eval)
+            board = computer_board
 
         return maxEval
 
     # player is finding its min loss
     else:
         minEval = inf
-        # board[position] = 'x'
+        player_board = copy.deepcopy(board)
 
         for pos in notOccupied(board):
             board[pos] = 'x'
             eval = minimax(board, depth-1, True)
             minEval = min(minEval, eval)
+            board = player_board
 
         return minEval
 
