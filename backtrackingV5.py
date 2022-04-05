@@ -2,7 +2,7 @@ from itertools import chain
 import copy
 from math import inf
 from operator import index
-
+import random
 # flat -> 2d
 
 
@@ -72,9 +72,10 @@ def ai(board):
     na = notOccupied(board)
 
     # list for winning moves
-    # moves[0] = tie
-    # moves[1] = win
-    moves = []
+    # moves[0] = loss
+    # moves[1] = tie
+    # moves[2] = win
+    moves = [[], [], []]
 
     for open_space in na:
 
@@ -95,8 +96,12 @@ def ai(board):
 
         # when a move is winning we want to save the move to a list #
         # if move is 1 it is winning
-        if move == 0 or move == 1:
-            moves.append(open_space)
+        if move == -1:
+            moves[0].append(open_space)
+        elif move == 0:
+            moves[1].append(open_space)
+        else:
+            moves[2].append(open_space)
 
         # print
         printBoard(normalBoard(board))
@@ -107,15 +112,16 @@ def ai(board):
 
         print()
 
-    # idk what to do here lol
-    return moves
+    print('move list: ', moves)
+    if len(moves[2]) > 0:
+        return moves[2][0]
+    elif len(moves[1]) > 0:
+        return moves[1][random.randint(0,len(moves[1])-1)]
+    else:
+        return moves[0][random.randint(0,len(moves[0])-1)]
 
 
 def minimax(board, depth, maximizingPlayer):
-
-    # print()
-    # printBoard(normalBoard(board))
-    # print()
 
     game_over, winning_character = win(board)
 
@@ -179,8 +185,8 @@ def main():
     # board
     # board = [['o', 'o', 'x'], [' ', 'o', ' '], ['x', ' ', ' ']]
     # board = [['o', 'x', 'o'], ['x', 'x', 'o'], [' ', ' ', ' ']]
-    # board = [[' ', ' ', ' '], [' ', 'x', ' '], [' ', ' ', ' ']]
-    board = [['x', 'x', 'o'], ['x', 'o', ' '], [' ', ' ', ' ']]
+    board = [[' ', ' ', ' '], [' ', 'x', ' '], [' ', ' ', ' ']]
+    # board = [['x', 'x', 'o'], ['x', 'o', ' '], [' ', ' ', ' ']]
     board = flattenBoard(board)
 
     # backtracking

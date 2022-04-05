@@ -3,19 +3,6 @@ import random
 from math import inf
 
 
-def to_nested_list(board: list) -> list:
-    """Takes in a flattened list and converts it to a nested list
-
-    Args:
-        board (list): Game board for Tic-Tac-Toe
-
-    Returns:
-        list: A nested list of the original flattened one
-    """
-
-    return [board[i*3:i*3+3] for i in range(0, 3)]
-
-
 def notOccupied(board: list) -> list:
     """Checks to see which spaces on the board are no occupied
 
@@ -81,50 +68,27 @@ def printBoard(board: list) -> None:
         board (list): Game board for Tic-Tac-Toe
     """
     for i in range(3):
-        row = str()
 
-        for j in range(3):
-
-            if (j < 2):
-                row += (' ' + board[i][j] + ' |')
-            else:
-                row += (' ' + board[i][j])
-
-        print(row)
+        print(f' {board[(i*3)]} | {board[(i*3)+1]} | {board[(i*3)+2]}')
 
         if (i < 2):
             print("-----------")
 
 
 def ai(board):
-    # open spaces
-    na = notOccupied(board)
 
-    # list for winning moves
-    # moves[0] = loss
-    # moves[1] = tie
-    # moves[2] = win
+    open_starting_positions = notOccupied(board)
+
+    # [ [lose], [tie], [win] ]
     moves = [[], [], []]
 
-    for open_space in na:
+    for open_space in open_starting_positions:
 
-        # because we want to revert back to the original board after trying the combinations #
-        # original board
         original_board = copy.deepcopy(board)
 
-        # print
-        print('\n')
-        print('ai move @ index ', open_space)
-
-        # put ai in empty space
         board[open_space] = 'o'
+        move = minimax(board, len(open_starting_positions), False)  # return -1,0,1
 
-        # find best move
-        move = minimax(board, len(na), False)  # return -1,0,1
-        print('move score: ', move)
-
-        # when a move is winning we want to save the move to a list #
-        # if move is 1 it is winning
         if move == -1:
             moves[0].append(open_space)
         elif move == 0:
@@ -132,14 +96,8 @@ def ai(board):
         else:
             moves[2].append(open_space)
 
-        # print
-        printBoard(to_nested_list(board))
-
-        # because we want to revert back to the original board after trying the combinations #
-        # resets board to original board
         board = original_board
 
-        print()
 
     print('move list: ', moves)
     if len(moves[2]) > 0:
@@ -152,22 +110,15 @@ def ai(board):
 
 def minimax(board, depth, maximizingPlayer):
 
-    # print()
-    # printBoard(normalBoard(board))
-    # print()
-
     game_over, winning_character = win(board)
 
-    # indicates a tie
-    if depth == 0 or isFull(board):
+    if depth == 0 or isFull(board): # tie or depth requirement met
         return 0
 
-    # indicates a win
-    if game_over and winning_character == 'o':
+    if game_over and winning_character == 'o': # win
         return 1
 
-    # indicates a loss
-    if game_over and winning_character == 'x':
+    if game_over and winning_character == 'x': # lose
         return -1
 
     # computer is findings its max win
@@ -201,14 +152,16 @@ def main():
     # boards
     # board = [['o', 'o', 'x'], [' ', 'o', ' '], ['x', ' ', ' ']]
     # board = [['o', 'x', 'o'], ['x', 'x', 'o'], [' ', ' ', ' ']]
-    # board = [[' ', ' ', ' '], [' ', 'x', ' '], [' ', ' ', ' ']]
-    board = ['x', 'x', 'o', 'x', 'o', ' ', ' ', ' ', ' ']
+    board = [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ']
+    # board = ['x', 'x', 'o', 'x', 'o', ' ', ' ', ' ', ' ']
     # board = flattenBoard(board)
 
     # backtracking
     print('starting backtracking...')
     move = ai(board)
     print('best move: ', move)
+
+    return move
 
 
 if __name__ == '__main__':
