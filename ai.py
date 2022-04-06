@@ -96,6 +96,8 @@ def ai(board):
         else:
             moves[2].append(open_space)
 
+        print(f'Index {open_space}, Score {move}')
+
         board = original_board
 
 
@@ -112,57 +114,53 @@ def minimax(board, depth, maximizingPlayer):
 
     game_over, winning_character = win(board)
 
-    if depth == 0 or isFull(board): # tie or depth requirement met
-        return 0
+    if game_over and winning_character == 'x': # lose
+        return -1
 
     if game_over and winning_character == 'o': # win
         return 1
 
-    if game_over and winning_character == 'x': # lose
-        return -1
+    if depth == 0 or isFull(board): # tie or depth requirement met
+        return 0
 
     # computer is findings its max win
     if maximizingPlayer:
         maxEval = -inf
-        computer_board = copy.deepcopy(board)
 
         for pos in notOccupied(board):
             board[pos] = 'o'
             eval = minimax(board, depth-1, False)
             maxEval = max(maxEval, eval)
-            board = computer_board
+            board[pos] = ' '
 
         return maxEval
 
     # player is finding its min loss
     else:
         minEval = inf
-        player_board = copy.deepcopy(board)
 
         for pos in notOccupied(board):
             board[pos] = 'x'
             eval = minimax(board, depth-1, True)
             minEval = min(minEval, eval)
-            board = player_board
+            board[pos] = ' '
 
         return minEval
 
 
 def main():
-    # boards
+    # Board Examples
     # board = [['o', 'o', 'x'], [' ', 'o', ' '], ['x', ' ', ' ']]
     # board = [['o', 'x', 'o'], ['x', 'x', 'o'], [' ', ' ', ' ']]
-    board = [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ']
-    # board = ['x', 'x', 'o', 'x', 'o', ' ', ' ', ' ', ' ']
+    # board = [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ']
+    board = ['x', 'x', 'o', 'x', 'o', ' ', ' ', ' ', ' ']
     # board = flattenBoard(board)
 
     # backtracking
-    print('starting backtracking...')
+    print('Starting backtracking...')
+    print()
     move = ai(board)
     print('best move: ', move)
-
-    return move
-
 
 if __name__ == '__main__':
     main()
