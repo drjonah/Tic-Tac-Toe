@@ -13,13 +13,13 @@ To play, download **game.py** and **ai.py**. **game.py** is what you will run in
 
 This is a board showing each index/position on the board.
 
- 0 | 1 | 2 
+`` 0 | 1 | 2 ``
 
---- --- ---
+``-- --- --``
 
 `` 3 | 4 | 5``
 
-``--- --- ---``
+``-- --- --``
 
 `` 6 | 7 | 8 ``
 
