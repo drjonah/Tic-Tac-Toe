@@ -124,9 +124,9 @@ def main():
     game_board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 
     # constants
-    # difficulty = 8 # easy
-    # difficulty = 4 # medium
-    difficulty = 1 # hard
+    # difficulty = 1 # childs play
+    # difficulty = 2 # hard
+    difficulty = 3 # impossible
     number_of_moves = 0
 
     run = True

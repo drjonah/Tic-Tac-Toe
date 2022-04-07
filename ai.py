@@ -82,8 +82,13 @@ def ai(board, difficulty):
     open_starting_positions_length = len(open_starting_positions)
 
     # managging depth
-    depth = open_starting_positions_length//difficulty
-    print(f'Depth: {depth}')
+    if difficulty == 1:
+        depth = open_starting_positions_length//6
+    elif difficulty == 2:
+        depth = open_starting_positions_length//3
+    else:
+        depth = open_starting_positions_length
+    # print(f'Depth: {depth}')
 
     # [ [lose], [tie], [win] ]
     moves = [[], [], []]
