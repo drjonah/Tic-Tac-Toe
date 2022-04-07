@@ -3,6 +3,10 @@
 ## Meet Alex!
 Alex is an AI designed to never lose a tic tac toe game!
 
+Alex is able to predict every board possible throughout the game given an index and determine all of the winning, tying, and losing positions. From those three, Alex prioritizes the winnning, then the tying, and finally the losing positions. If there are multiple outcomes in each, Alex will chose randomly which path/position to pursue. 
+
+Alex is able to accomplish this through an algorithm known as **minimax**. This algorithm works by factoring the best way (max) for Alex to win and the best way (min) for you to lose to compute a 1, 0, -1. These represent winning, tying, and losing respectively.
+
 ## How to play!
 
 To play, download **game.py** and **ai.py**. **game.py** is what you will run in your terminal to play tic tac toe! **ai.py** is where all of Alex's logic is found. **ai.py** can be run to test single move outcomes! Costom boards can be stored within **ai.py**'s main function.
