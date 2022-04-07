@@ -104,7 +104,6 @@ def ai(board, difficulty):
 
         board = original_board
 
-
     print(f'AI [{difficulty}]: {moves}')
     if len(moves[2]) > 0:
         return moves[2][0]
@@ -118,13 +117,13 @@ def minimax(board, depth, maximizingPlayer):
 
     game_over, winning_character = win(board)
 
-    if game_over and winning_character == 'o': # win
+    if game_over and winning_character == 'o':  # win
         return 1
 
-    if game_over and winning_character == 'x': # lose
+    if game_over and winning_character == 'x':  # lose
         return -1
 
-    if depth == 0 or isFull(board): # tie or depth requirement met
+    if depth == 0 or isFull(board):  # tie or depth requirement met
         return 0
 
     # computer is findings its max win
@@ -156,26 +155,26 @@ def main():
     # Board Examples
     # board = [['o', 'o', 'x'], [' ', 'o', ' '], ['x', ' ', ' ']]
     # board = [['o', 'x', 'o'], ['x', 'x', 'o'], [' ', ' ', ' ']]
-    board = [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ']
+    # board = [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ']
     # board = [' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     # board = ['o', 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ']
     # board = ['o', 'x', 'x', 'o', ' ', ' ', 'x', ' ', ' ']
-    # printBoard(board)
-    # board = ['x', 'x', 'o', 'x', 'o', ' ', ' ', ' ', ' ']
+    board = ['x', 'x', 'o', 'x', 'o', ' ', ' ', ' ', ' ']
     # board = flattenBoard(board)
 
     # backtracking
     printBoard(board)
     print('Starting backtracking...')
-    print('Difficulty = 4 (easy), 2 (medium), 1 (hard)')
+    # print('Difficulty = 4 (easy), 2 (medium), 1 (hard)')
     print()
-    test_board = copy.deepcopy(board)
-    move = ai(test_board, 4)
-    test_board = copy.deepcopy(board)
-    move = ai(test_board, 2)
+    # test_board = copy.deepcopy(board)
+    # move = ai(test_board, 4)
+    # test_board = copy.deepcopy(board)
+    # move = ai(test_board, 2)
     test_board = copy.deepcopy(board)
     move = ai(test_board, 1)
     print('best move: ', move)
+
 
 if __name__ == '__main__':
     main()

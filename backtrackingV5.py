@@ -125,6 +125,10 @@ def minimax(board, depth, maximizingPlayer):
 
     game_over, winning_character = win(board)
 
+    # indicates a loss
+    if game_over and winning_character == 'x':
+        return -1
+
     # indicates a tie
     if depth == 0 or isFull(board):
         return 0
@@ -132,10 +136,6 @@ def minimax(board, depth, maximizingPlayer):
     # indicates a win
     if game_over and winning_character == 'o':
         return 1
-
-    # indicates a loss
-    if game_over and winning_character == 'x':
-        return -1
 
     # computer is findings its max win
     if maximizingPlayer:
