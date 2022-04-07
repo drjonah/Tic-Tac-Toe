@@ -16,7 +16,7 @@ Here are the indexes for each position on the board.
 
 For example, 0 plays the top left while 7 plays the middle bottom.
 
-__Settings__
+###### Settings
 You can control how hard you want Alex to play *(or search)*. Within the main function found in **game.py**, there is a variable called *difficulty*. Defaulty, this is set to 1. This indicates the the board will go as DEEP as it can to find a winning position. Difficulty 1 is the hardest setting!
 
 Recommended difficulty settings:
