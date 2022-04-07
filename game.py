@@ -1,6 +1,6 @@
-from itertools import chain
 import copy
 import datetime
+import os
 from ai import *
 
 
@@ -93,17 +93,40 @@ def store_games(game_board, difficulty, number_of_moves, winner):
                     FILE.write("-----------\n")
 
         print('Game stored.')
-        
+
     except:
         print('Game saving failed.')
 
+def end(game_board, result, character, difficulty, number_of_moves):
+    if result and character == 'x':
+        print('Win!')
+        printBoard(game_board)
+        store_games(game_board, difficulty, number_of_moves, character)
+        return True
+    elif result and character == 'o':
+        print('Loss!')
+        printBoard(game_board)
+        store_games(game_board, difficulty, number_of_moves, character)
+        return True
+    elif isFull(game_board):
+        print('Tie!')
+        printBoard(game_board)
+        store_games(game_board, difficulty, number_of_moves, character)
+        return True
+    return False
+
 
 def main():
+    os.system('cls')
+    print('IMPOSSIBLE TIC TAC TOE')
+
     # game board
     game_board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 
     # constants
-    difficulty = 1
+    # difficulty = 8 # easy
+    # difficulty = 4 # medium
+    difficulty = 1 # hard
     number_of_moves = 0
 
     run = True
@@ -121,20 +144,7 @@ def main():
             continue
 
         result, character = win(game_board)
-        if result and character == 'x':
-            print('Win!')
-            printBoard(game_board)
-            store_games(game_board, difficulty, number_of_moves, character)
-            break
-        elif result and character == 'o':
-            print('Loss!')
-            printBoard(game_board)
-            store_games(game_board, difficulty, number_of_moves, character)
-            break
-        elif isFull(game_board):
-            print('Tie!')
-            printBoard(game_board)
-            store_games(game_board, difficulty, number_of_moves, character)
+        if end(game_board, result, character, difficulty, number_of_moves):
             break
 
         game_board_copy = copy.copy(game_board)
@@ -142,21 +152,9 @@ def main():
         number_of_moves += 1
 
         result, character = win(game_board)
-        if result and character == 'x':
-            print('Win!')
-            printBoard(game_board)
-            store_games(game_board, difficulty, number_of_moves, character)
+        if end(game_board, result, character, difficulty, number_of_moves):
             break
-        elif result and character == 'o':
-            print('Loss!')
-            printBoard(game_board)
-            store_games(game_board, difficulty, number_of_moves, character)
-            break
-        elif isFull(game_board):
-            print('Tie!')
-            printBoard(game_board)
-            store_games(game_board, difficulty, number_of_moves, character)
-            break
+    # main()
 
 
 if __name__ == '__main__':

@@ -155,22 +155,17 @@ def main():
     # Board Examples
     # board = [['o', 'o', 'x'], [' ', 'o', ' '], ['x', ' ', ' ']]
     # board = [['o', 'x', 'o'], ['x', 'x', 'o'], [' ', ' ', ' ']]
-    board = [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ']
+    # board = [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ']
     # board = [' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     # board = ['o', 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ']
     # board = ['o', 'x', 'x', 'o', ' ', ' ', 'x', ' ', ' ']
-    # board = ['x', 'x', 'o', 'x', 'o', ' ', ' ', ' ', ' ']
+    board = ['x', 'x', 'o', 'x', 'o', ' ', ' ', ' ', ' ']
     # board = flattenBoard(board)
 
     # backtracking
     printBoard(board)
     print('Starting backtracking...')
-    # print('Difficulty = 4 (easy), 2 (medium), 1 (hard)')
     print()
-    # test_board = copy.deepcopy(board)
-    # move = ai(test_board, 4)
-    # test_board = copy.deepcopy(board)
-    # move = ai(test_board, 2)
     test_board = copy.deepcopy(board)
     move = ai(test_board, 1)
     print('best move: ', move)

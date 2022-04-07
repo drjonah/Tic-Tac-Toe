@@ -1,16 +1,34 @@
-from src.ai import *
+import sys
+sys.path.insert(0, '/users/jonah/Desktop/coding/tic-tac-toe')
+
+from ai import *
 
 def get_boards():
-    board1 = [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ']
-    board2 = [' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-    board3 = ['o', 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ']
-    board4 = ['o', 'x', 'x', 'o', ' ', ' ', 'x', ' ', ' ']
-    board5 = ['x', 'x', 'o', 'x', 'o', ' ', ' ', ' ', ' ']
+    board = [
+        [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' '],
+        [' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        ['o', 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' '],
+        ['o', 'x', 'x', 'o', ' ', ' ', 'x', ' ', ' '],
+        ['x', 'x', 'o', 'x', 'o', ' ', ' ', ' ', ' ']
+    ]
 
-    return board1 + board2 + board3 + board4 + board5
+    return board
 
-def run():
-    print(get_boards())
+
+def main():
+    all_board = get_boards()
+    all_difficulties = [4, 2, 1]
+
+    for difficulty in all_difficulties:
+        for board in all_board:
+            print(f'level {difficulty}, board {board}')
+            move = ai(board, difficulty)
+            print(f'best move: {move}')
+
+            print()
+        
+        print()
+
 
 if __name__ == '__main__':
-    run()
+    main()
