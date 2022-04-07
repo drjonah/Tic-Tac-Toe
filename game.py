@@ -134,7 +134,7 @@ def main():
 
         printBoard(game_board)
 
-        player_move = int(input('move: '))
+        player_move = int(input('[YOU] move: '))
 
         if is_on_game_board(player_move) and is_open(game_board, player_move):
             game_board[player_move] = 'x'
@@ -148,7 +148,9 @@ def main():
             break
 
         game_board_copy = copy.copy(game_board)
-        game_board[ai(game_board_copy, difficulty)] = 'o'
+        computer_move = ai(game_board_copy, difficulty)
+        game_board[computer_move] = 'o'
+        print(f'[AI] move: {computer_move}')
         number_of_moves += 1
 
         result, character = win(game_board)

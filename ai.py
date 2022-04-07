@@ -79,13 +79,18 @@ def ai(board, difficulty):
 
     # available positions from the start
     open_starting_positions = notOccupied(board)
+    open_starting_positions_length = len(open_starting_positions)
 
     # managging depth
-    depth = len(open_starting_positions)//difficulty
+    depth = open_starting_positions_length//difficulty
     print(f'Depth: {depth}')
 
     # [ [lose], [tie], [win] ]
     moves = [[], [], []]
+
+    if open_starting_positions_length == 9:
+        moves[2].append(4)
+        return moves
 
     # analyzing positions
     for open_space in open_starting_positions:
@@ -156,6 +161,7 @@ def main():
     # board = [['o', 'o', 'x'], [' ', 'o', ' '], ['x', ' ', ' ']]
     # board = [['o', 'x', 'o'], ['x', 'x', 'o'], [' ', ' ', ' ']]
     # board = [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ']
+    # board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     # board = [' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     # board = ['o', 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ']
     # board = ['o', 'x', 'x', 'o', ' ', ' ', 'x', ' ', ' ']
