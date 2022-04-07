@@ -1,0 +1,13 @@
+Tic-Tac-Toe
+
+Time Stamp: 2022-04-06 23:05:36.394647
+Difficulty: 1
+Move Count: 8
+Winner: o
+
+Game Board:
+ x | x | o
+-----------
+ x | x | o
+-----------
+   | o | o
