@@ -74,22 +74,28 @@ def store_games(game_board, difficulty, number_of_moves, winner):
     TIME_STAMP = str(datetime.datetime.now())
     FILE_NAME = ('-').join(TIME_STAMP.split('.')[0].split(':'))
 
-    with open(f'./games/{FILE_NAME}.txt', 'w') as FILE:
+    try:
+        with open(f'./games/{FILE_NAME}.txt', 'w') as FILE:
 
-        FILE.write('Tic-Tac-Toe\n\n')
-        FILE.write(f'Time Stamp: {TIME_STAMP}\n')
-        FILE.write(f'Difficulty: {difficulty}\n')
-        FILE.write(f'Move Count: {number_of_moves}\n')
-        FILE.write(f'Winner: {winner}\n\n')
+            FILE.write('Tic-Tac-Toe\n\n')
+            FILE.write(f'Time Stamp: {TIME_STAMP}\n')
+            FILE.write(f'Difficulty: {difficulty}\n')
+            FILE.write(f'Move Count: {number_of_moves}\n')
+            FILE.write(f'Winner: {winner}\n\n')
 
-        FILE.write('Game Board:\n')
-        for i in range(3):
+            FILE.write('Game Board:\n')
+            for i in range(3):
 
-            FILE.write(
-                f' {game_board[(i*3)]} | {game_board[(i*3)+1]} | {game_board[(i*3)+2]}\n')
+                FILE.write(
+                    f' {game_board[(i*3)]} | {game_board[(i*3)+1]} | {game_board[(i*3)+2]}\n')
 
-            if (i < 2):
-                FILE.write("-----------\n")
+                if (i < 2):
+                    FILE.write("-----------\n")
+
+        print('Game stored.')
+        
+    except:
+        print('Game saving failed.')
 
 
 def main():
