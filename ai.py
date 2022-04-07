@@ -75,19 +75,25 @@ def printBoard(board: list) -> None:
             print("-----------")
 
 
-def ai(board):
+def ai(board, difficulty):
 
+    # available positions from the start
     open_starting_positions = notOccupied(board)
+
+    # managging depth
+    depth = len(open_starting_positions)//difficulty
+    print(f'Depth: {depth}')
 
     # [ [lose], [tie], [win] ]
     moves = [[], [], []]
 
+    # analyzing positions
     for open_space in open_starting_positions:
 
         original_board = copy.deepcopy(board)
 
         board[open_space] = 'o'
-        move = minimax(board, len(open_starting_positions), False)  # return -1,0,1
+        move = minimax(board, depth, False)  # return -1,0,1
 
         if move == -1:
             moves[0].append(open_space)
@@ -96,12 +102,10 @@ def ai(board):
         else:
             moves[2].append(open_space)
 
-        print(f'Index {open_space}, Score {move}')
-
         board = original_board
 
 
-    print('move list: ', moves)
+    print(f'AI [{difficulty}]: {moves}')
     if len(moves[2]) > 0:
         return moves[2][0]
     elif len(moves[1]) > 0:
@@ -114,11 +118,11 @@ def minimax(board, depth, maximizingPlayer):
 
     game_over, winning_character = win(board)
 
-    if game_over and winning_character == 'x': # lose
-        return -1
-
     if game_over and winning_character == 'o': # win
         return 1
+
+    if game_over and winning_character == 'x': # lose
+        return -1
 
     if depth == 0 or isFull(board): # tie or depth requirement met
         return 0
@@ -152,14 +156,25 @@ def main():
     # Board Examples
     # board = [['o', 'o', 'x'], [' ', 'o', ' '], ['x', ' ', ' ']]
     # board = [['o', 'x', 'o'], ['x', 'x', 'o'], [' ', ' ', ' ']]
-    # board = [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ']
-    board = ['x', 'x', 'o', 'x', 'o', ' ', ' ', ' ', ' ']
+    board = [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ']
+    # board = [' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    # board = ['o', 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ']
+    # board = ['o', 'x', 'x', 'o', ' ', ' ', 'x', ' ', ' ']
+    # printBoard(board)
+    # board = ['x', 'x', 'o', 'x', 'o', ' ', ' ', ' ', ' ']
     # board = flattenBoard(board)
 
     # backtracking
+    printBoard(board)
     print('Starting backtracking...')
+    print('Difficulty = 4 (easy), 2 (medium), 1 (hard)')
     print()
-    move = ai(board)
+    test_board = copy.deepcopy(board)
+    move = ai(test_board, 4)
+    test_board = copy.deepcopy(board)
+    move = ai(test_board, 2)
+    test_board = copy.deepcopy(board)
+    move = ai(test_board, 1)
     print('best move: ', move)
 
 if __name__ == '__main__':
