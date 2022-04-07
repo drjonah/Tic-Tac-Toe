@@ -145,6 +145,7 @@ def main():
 
         result, character = win(game_board)
         if end(game_board, result, character, difficulty, number_of_moves):
+            input('\npress enter to quit...')
             break
 
         game_board_copy = copy.copy(game_board)
@@ -155,6 +156,7 @@ def main():
 
         result, character = win(game_board)
         if end(game_board, result, character, difficulty, number_of_moves):
+            input('\npress enter to quit...')
             break
 
 if __name__ == '__main__':

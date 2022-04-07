@@ -174,12 +174,15 @@ def main():
     # board = flattenBoard(board)
 
     # backtracking
+    print('Tic Tac Toe Board')
     printBoard(board)
-    print('Starting backtracking...')
+    print('\nStarting Alex...')
     print()
     test_board = copy.deepcopy(board)
     move = ai(test_board, 3)
-    print('best move: ', move)
+    print('Alex\'s move: ', move)
+
+    input('\npress enter to quit...')
 
 
 if __name__ == '__main__':
