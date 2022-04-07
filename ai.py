@@ -133,27 +133,27 @@ def minimax(board, depth, maximizingPlayer):
 
     # computer is findings its max win
     if maximizingPlayer:
-        maxEval = -inf
+        max_num = -inf
 
         for pos in notOccupied(board):
             board[pos] = 'o'
-            eval = minimax(board, depth-1, False)
-            maxEval = max(maxEval, eval)
+            num = minimax(board, depth-1, False)
+            max_num = max(max_num, num)
             board[pos] = ' '
 
-        return maxEval
+        return max_num
 
     # player is finding its min loss
     else:
-        minEval = inf
+        min_num = inf
 
         for pos in notOccupied(board):
             board[pos] = 'x'
-            eval = minimax(board, depth-1, True)
-            minEval = min(minEval, eval)
+            num = minimax(board, depth-1, True)
+            min_num = min(min_num, num)
             board[pos] = ' '
 
-        return minEval
+        return min_num
 
 
 def main():
