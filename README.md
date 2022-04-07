@@ -16,15 +16,18 @@ Here are the indexes for each position on the board.
 
 For example, 0 plays the top left while 7 plays the middle bottom.
 
-###### Settings
+#### Settings
 You can control how hard you want Alex to play *(or search)*. Within the main function found in **game.py**, there is a variable called *difficulty*. Defaulty, this is set to 1. This indicates the the board will go as DEEP as it can to find a winning position. Difficulty 1 is the hardest setting!
 
 Recommended difficulty settings:
-* *difficulty = 8* = CHILDRENS PLAY
-* *difficulty = 4* = EASY
-* *difficulty = 2* = HARD
-* *difficulty = 1* = IMPOSSIBLE
+* *difficulty = 8* = CHILDRENS PLAY!
+* *difficulty = 4* = EASY!
+* *difficulty = 2* = HARD!
+* *difficulty = 1* = IMPOSSIBLE!
 
+#### Coming soon!
+- [ ] Interactive playable GUI for Tic Tac Toe.
+- [ ] Tic Tac Toe expansion.
 
 #### EXTRA:
 If Alex beats you on *difficulty = 1*, let me know! It is not suppose to lose! ;)
