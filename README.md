@@ -35,8 +35,9 @@ Recommended difficulty settings:
 * *difficulty = 3* = IMPOSSIBLE!
 
 ## Coming soon!
+- [x] Difficulty modes for Alex!
 - [ ] Interactive playable GUI for Tic Tac Toe.
 - [ ] Tic Tac Toe expansion.
 
 ## EXTRA:
-If Alex beats you on *difficulty = 1*, let me know! It is not suppose to lose! ;)
+If Alex beats you on *difficulty = 3*, let me know! It is not suppose to lose! ;)
