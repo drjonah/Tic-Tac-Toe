@@ -90,7 +90,7 @@ def store_games(game_board, difficulty, number_of_moves, winner):
                     f' {game_board[(i*3)]} | {game_board[(i*3)+1]} | {game_board[(i*3)+2]}\n')
 
                 if (i < 2):
-                    FILE.write("-----------\n")
+                    FILE.write("--- --- ---\n")
 
         print('Game stored.')
 
@@ -156,8 +156,6 @@ def main():
         result, character = win(game_board)
         if end(game_board, result, character, difficulty, number_of_moves):
             break
-    # main()
-
 
 if __name__ == '__main__':
     main()
