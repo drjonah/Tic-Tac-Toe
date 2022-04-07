@@ -58,7 +58,7 @@ def win(board: list) -> tuple:
         elif (board[2] == player and board[4] == player and board[6] == player):
             return True, player
 
-    return False, str()
+    return False, None
 
 
 def printBoard(board: list) -> None:
@@ -165,8 +165,8 @@ def main():
     # Board Examples
     # board = [['o', 'o', 'x'], [' ', 'o', ' '], ['x', ' ', ' ']]
     # board = [['o', 'x', 'o'], ['x', 'x', 'o'], [' ', ' ', ' ']]
-    # board = [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ']
-    board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    board = [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ']
+    # board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     # board = [' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     # board = ['o', 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ']
     # board = ['o', 'x', 'x', 'o', ' ', ' ', 'x', ' ', ' ']
@@ -178,7 +178,7 @@ def main():
     print('Starting backtracking...')
     print()
     test_board = copy.deepcopy(board)
-    move = ai(test_board, 1)
+    move = ai(test_board, 3)
     print('best move: ', move)
 
 

@@ -52,7 +52,7 @@ def win(game_board: list) -> tuple:
         elif (game_board[2] == player and game_board[4] == player and game_board[6] == player):
             return True, player
 
-    return False, str()
+    return False, None
 
 
 def printBoard(game_board: list) -> None:
