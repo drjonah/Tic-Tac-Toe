@@ -25,9 +25,9 @@ Recommended difficulty settings:
 * *difficulty = 2* = HARD!
 * *difficulty = 1* = IMPOSSIBLE!
 
-#### Coming soon!
+## Coming soon!
 - [ ] Interactive playable GUI for Tic Tac Toe.
 - [ ] Tic Tac Toe expansion.
 
-#### EXTRA:
+## EXTRA:
 If Alex beats you on *difficulty = 1*, let me know! It is not suppose to lose! ;)
