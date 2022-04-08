@@ -11,7 +11,7 @@ Alex is able to accomplish this through an algorithm known as **minimax**. This 
 
 To play, you will want to download the whole *src* folder. To run the game, you will want to run the file **runner.py**. **Settings.json** is where you will edit the settings for your game. (How to use **settings.json** can be found below.) **ai.py** is where all of Alex's logic is found. **ai.py** can be run to test single move outcomes! Costom boards can be stored within **ai.py**'s main function. **Cli.py** and **gui.py** can both be ran by themselves but they run differently outside **runner.py**.
 
-#### cli.py info
+### cli.py info
 This is a board showing each index/position on the board.
 
 `` 0 | 1 | 2 ``
