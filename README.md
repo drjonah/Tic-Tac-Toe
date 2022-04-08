@@ -27,7 +27,7 @@ This is a board showing each index/position on the board.
 
 For example, 0 plays the top left while 7 plays the middle bottom.
 
-#### settings.json info
+### settings.json info
 **Settings.json** is how you control **runner.py**. In **settings.json**, you can edit two parameters: *mode* and *ai difficulty*. 
 
 *Mode*
