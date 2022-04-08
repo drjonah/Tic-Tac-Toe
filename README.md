@@ -31,7 +31,7 @@ For example, 0 plays the top left while 7 plays the middle bottom.
 **Settings.json** is how you control **runner.py**. In **settings.json**, you can edit two parameters: *mode* and *ai difficulty*. 
 *Mode*
 * "cli" (runs Tic Tac Toe in the terminal)
-* *"gui" (run Tic Tac Toe in an interactive GUI)
+* "gui" (run Tic Tac Toe in an interactive GUI)
 *Ai difficulty*
 * "1" = CHILDS PLAY!
 * "2" = HARD!
