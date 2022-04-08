@@ -9,8 +9,9 @@ Alex is able to accomplish this through an algorithm known as **minimax**. This 
 
 ## How to play!
 
-To play, download **game.py** and **ai.py**. **game.py** is what you will run in your terminal to play tic tac toe! **ai.py** is where all of Alex's logic is found. **ai.py** can be run to test single move outcomes! Costom boards can be stored within **ai.py**'s main function.
+To play, you will want to download the whole *src* folder. To run the game, you will want to run the file **runner.py**. **Settings.json** is where you will edit the settings for your game. (How to use **settings.json** can be found below.) **ai.py** is where all of Alex's logic is found. **ai.py** can be run to test single move outcomes! Costom boards can be stored within **ai.py**'s main function. **Cli.py** and **gui.py** can both be ran by themselves but they run differently outside **runner.py**.
 
+#### Cli.py
 This is a board showing each index/position on the board.
 
 `` 0 | 1 | 2 ``
@@ -26,17 +27,19 @@ This is a board showing each index/position on the board.
 
 For example, 0 plays the top left while 7 plays the middle bottom.
 
-#### Settings
-You can control how hard you want Alex to play *(or search)*. Within the main function found in **game.py**, there is a variable called *difficulty*. Defaulty, this is set to 1. This indicates the the board will go as DEEP as it can to find a winning position. Difficulty 1 is the hardest setting!
-
-Recommended difficulty settings:
-* *difficulty = 1* = CHILDS PLAY!
-* *difficulty = 2* = HARD!
-* *difficulty = 3* = IMPOSSIBLE!
+## Settings.JSON
+**Settings.json** is how you control **runner.py**. In **settings.json**, you can edit two parameters: *mode* and *ai difficulty*. 
+*Mode*
+* "cli" (runs Tic Tac Toe in the terminal)
+* *"gui" (run Tic Tac Toe in an interactive GUI)
+*Ai difficulty*
+* "1" = CHILDS PLAY!
+* "2" = HARD!
+* "3" = IMPOSSIBLE!
 
 ## Coming soon!
 - [x] Difficulty modes for Alex!
-- [ ] Interactive playable GUI for Tic Tac Toe.
+- [x] Interactive playable GUI for Tic Tac Toe.
 - [ ] Tic Tac Toe expansion.
 
 ## EXTRA:
