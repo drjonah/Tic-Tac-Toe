@@ -11,7 +11,7 @@ Alex is able to accomplish this through an algorithm known as **minimax**. This 
 
 To play, you will want to download the whole *src* folder. To run the game, you will want to run the file **runner.py**. **Settings.json** is where you will edit the settings for your game. (How to use **settings.json** can be found below.) **ai.py** is where all of Alex's logic is found. **ai.py** can be run to test single move outcomes! Costom boards can be stored within **ai.py**'s main function. **Cli.py** and **gui.py** can both be ran by themselves but they run differently outside **runner.py**.
 
-#### cli.py information
+#### cli.py info
 This is a board showing each index/position on the board.
 
 `` 0 | 1 | 2 ``
@@ -27,7 +27,7 @@ This is a board showing each index/position on the board.
 
 For example, 0 plays the top left while 7 plays the middle bottom.
 
-## Settings.json
+#### settings.json info
 **Settings.json** is how you control **runner.py**. In **settings.json**, you can edit two parameters: *mode* and *ai difficulty*. 
 
 *Mode*
@@ -39,11 +39,11 @@ For example, 0 plays the top left while 7 plays the middle bottom.
 * "2" = HARD!
 * "3" = IMPOSSIBLE!
 
+## Extra:
+If Alex beats you on *difficulty = 3*, let me know! It is not suppose to lose! ;)
+
 ## Coming soon!
 - [x] Difficulty modes for Alex!
 - [x] Interactive playable GUI for Tic Tac Toe.
 - [ ] Tic Tac Toe expansion.
 - [x] Lose on difficulty level 3
-
-## EXTRA:
-If Alex beats you on *difficulty = 3*, let me know! It is not suppose to lose! ;)
